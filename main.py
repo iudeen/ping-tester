@@ -5,9 +5,11 @@ from fastapi import FastAPI, WebSocket, WebSocketException, Query, Depends
 from fastapi import status
 
 from ping_test import ping_tester
+from ping_test.loggers import logger
 
 app = FastAPI(title="Ping Tester")
 
+logger.debug("Hello World")
 
 async def get_configuration(
         target: Annotated[str | None, Query()] = None,
