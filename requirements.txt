@@ -1,5 +1,4 @@
 asyncer==0.0.2
-fastapi==0.99.1
+fastapi[all]==0.100.0
 pythonping==1.1.4
-uvicorn==0.22
-websockets==11.0.3
+loguru==0.7.0

@@ -9,11 +9,10 @@ from ping_test.loggers import logger
 
 app = FastAPI(title="Ping Tester")
 
-logger.debug("Hello World")
 
 async def get_configuration(
         target: Annotated[str | None, Query()] = None,
-        interval: Annotated[int, Query()] = 0,
+        interval: Annotated[int, Query()] = 1,
         timeout: Annotated[int, Query()] = 2,
         count: Annotated[int, Query()] = 4,
 ):
@@ -33,4 +32,5 @@ async def websocket_endpoint(websocket: WebSocket, config: dict = Depends(get_co
             await websocket.send_text(i.__repr__())
         await websocket.close()
     except Exception as e:
+        logger.exception(e)
         await websocket.close(status.WS_1003_UNSUPPORTED_DATA, reason=e.__repr__())
