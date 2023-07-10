@@ -12,9 +12,9 @@ app = FastAPI(title="Ping Tester")
 
 async def get_configuration(
         target: Annotated[str | None, Query()] = None,
-        interval: Annotated[int, Query()] = 1,
-        timeout: Annotated[int, Query()] = 2,
-        count: Annotated[int, Query()] = 4,
+        interval: Annotated[int, Query(lt=5)] = 0,
+        timeout: Annotated[int, Query(le=30)] = 2,
+        count: Annotated[int, Query(lt=25)] = 4,
 ):
     if not target:
         raise WebSocketException(status.WS_1007_INVALID_FRAME_PAYLOAD_DATA, reason="Target required")
