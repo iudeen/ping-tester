@@ -4,17 +4,18 @@ from fastapi.websockets import WebSocketDisconnect
 
 from main import app
 
+TARGET = "127.0.0.1"
 
 def test_websocket():
     client = TestClient(app)
-    with client.websocket_connect("/ws?target=google.com") as websocket:
+    with client.websocket_connect(f"/ws?target={TARGET}") as websocket:
         data = websocket.receive_text()
         assert "Reply from" in data
 
 
 def test_websocket_with_interval():
     client = TestClient(app)
-    with client.websocket_connect("/ws?target=google.com&interval=1") as websocket:
+    with client.websocket_connect(f"/ws?target={TARGET}&interval=1") as websocket:
         data = websocket.receive_text()
         assert "Reply from" in data
 
