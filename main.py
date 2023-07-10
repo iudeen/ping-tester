@@ -33,4 +33,4 @@ async def websocket_endpoint(websocket: WebSocket, config: dict = Depends(get_co
         await websocket.close()
     except Exception as e:
         logger.exception(e)
-        await websocket.close(status.WS_1003_UNSUPPORTED_DATA, reason=e.__repr__())
+        raise WebSocketException(status.WS_1003_UNSUPPORTED_DATA, reason=e.args)
